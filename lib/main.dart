@@ -45,8 +45,38 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: WebviewPage(uri: uri),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SplashPage(title: 'Flutter Demo Home Page'),
     );
+  }
+}
+
+class SplashPage extends StatefulWidget {
+  final String title;
+
+  const SplashPage({super.key, required this.title});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      Future.delayed(const Duration(seconds: 2)).then(
+        (value) async {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => MyHomePage(title: widget.title)));
+        },
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
 

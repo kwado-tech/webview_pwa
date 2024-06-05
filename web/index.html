@@ -45,11 +45,21 @@
 
   <!-- Add your JavaScript here -->
   <script>
-    window.onresize = function () {
-      document.body.height = window.innerHeight;
-      console.log(' window.onresize: ', window.innerHeight);
+    async function changeOrientation() {
+      if (screen.orientation) {
+        try {
+          // Temporarily lock orientation to force reflow
+          await screen.orientation.lock('landscape');
+          setTimeout(async () => {
+            await screen.orientation.unlock();
+          }, 500); // Wait 500ms before unlocking
+        } catch (error) {
+          console.error('Orientation lock failed:', error);
+        }
+      } else {
+        console.warn('Screen orientation API not supported.');
+      }
     }
-    window.onresize(); // called to initially set the height.
   </script>
 
   <style>

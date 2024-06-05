@@ -24,13 +24,12 @@
   <script>
     document.addEventListener("visibilitychange", function () {
       function adjustBodyHeight() {
-        document.body.style.height = window.innerHeight + 'px';
+        document.body.style.height = window.innerHeight + 'vh';
       }
 
       console.log('document.visibilityState: ', document.visibilityState);
       if (document.visibilityState === 'visible') {
-        // location.reload();
-        adjustBodyHeight();
+        location.reload();
       }
     });
   </script>

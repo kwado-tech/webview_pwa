@@ -45,26 +45,11 @@
 
   <!-- Add your JavaScript here -->
   <script>
-    function forceReflow() {
-      document.body.style.transform = 'scale(1)'; // Apply a small transformation
-      setTimeout(() => {
-        document.body.style.transform = ''; // Reset the transformation
-      }, 100); // Wait 100ms and reset
+    window.onresize = function () {
+      document.body.height = window.innerHeight;
+      console.log(' window.onresize: ', window.innerHeight);
     }
-
-    // Use History API to detect back navigation
-    window.addEventListener('popstate', function (event) {
-      // Force re-render when coming back
-      forceReflow();
-    });
-
-    // Push a new state to the history to detect back navigation
-    window.history.pushState({}, '');
-
-    // Force reflow on window focus
-    window.addEventListener('focus', function () {
-      forceReflow(); // Force re-render on focus
-    });
+    window.onresize(); // called to initially set the height.
   </script>
 
   <style>
@@ -79,7 +64,7 @@
       transition: transform 0.1s ease-in-out;
     }
 
-    
+
 
     #iframe-placeholder {
       position: absolute;

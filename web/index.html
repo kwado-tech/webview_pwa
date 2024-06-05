@@ -22,14 +22,12 @@
   <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
     defer></script>
   <script>
-    function setViewportHeight() {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-    }
-
-    window.addEventListener('resize', setViewportHeight);
-    window.addEventListener('orientationchange', setViewportHeight);
-
-    setViewportHeight();
+    document.addEventListener("visibilitychange", function () {
+      console.log('document.visibilityState: ', document.visibilityState);
+      if (document.visibilityState === 'visible') {
+        location.reload();
+      }
+    });
   </script>
   <style>
     :root {

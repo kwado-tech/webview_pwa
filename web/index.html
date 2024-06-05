@@ -81,14 +81,25 @@
   </script>
   <script>
     // adjusts the padding to remove any extra space added by the browser when navigating back from url (applicable to ios pwa)
-    document.addEventListener("visibilitychange", function () {
-      console.log('document.visibilityState: ->', document.visibilityState)
-      if (document.visibilityState === 'visible') {
-        document.body.style.marginBottom = '0px';
-        document.body.style.paddingBottom = '0px';
-      }
+    // document.addEventListener("visibilitychange", function () {
+    //   console.log('document.visibilityState: ->', document.visibilityState)
+    //   if (document.visibilityState === 'visible') {
+    //     document.body.style.marginBottom = '0px';
+    //     document.body.style.paddingBottom = '0px';
+    //   }
+    // });
+    window.addEventListener('focus', function () {
+      console.log('focus: ->', document.visibilityState)
+      document.body.style.marginBottom = '0px';
+      document.body.style.paddingBottom = '0px';
+    });
+    window.addEventListener('load', function () {
+      console.log('load: ->', document.visibilityState)
+      document.body.style.marginBottom = '0px';
+      document.body.style.paddingBottom = '0px';
     });
   </script>
+
 </head>
 
 <body>

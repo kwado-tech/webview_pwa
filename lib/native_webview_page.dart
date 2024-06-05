@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,7 +35,12 @@ class _WebviewPageState extends State<WebviewPage> {
     if (mounted) {
       Future.delayed(const Duration(seconds: 2)).then(
         (value) async {
-          await launchUrl(widget.uri, webOnlyWindowName: '_self');
+          final isIOSMobileWebPlatform =
+              kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS);
+
+          isIOSMobileWebPlatform
+              ? await launchUrl(widget.uri)
+              : await launchUrl(widget.uri, webOnlyWindowName: '_self');
 
           Navigator.of(context).pop();
         },

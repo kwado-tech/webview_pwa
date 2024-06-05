@@ -49,7 +49,7 @@
     defer></script>
 
   <style>
-    html,
+    /* html,
     body {
       overflow: hidden;
       height: 100%;
@@ -59,6 +59,26 @@
       background-color: #ffffff;
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
+    } */
+
+    html,
+    body {
+      overflow: hidden;
+      height: 100%;
+      -webkit-overflow-scrolling: touch;
+      /* Smooth scrolling for iOS */
+      padding: 0;
+      margin: 0;
+    }
+
+    #app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding-bottom: 0 !important;
+      /* Ensure no padding is added */
+      margin-bottom: 0 !important;
+      /* Ensure no margin is added */
     }
 
     #iframe-placeholder {

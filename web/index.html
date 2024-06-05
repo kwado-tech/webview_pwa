@@ -22,13 +22,15 @@
   <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
     defer></script>
   <script>
-    document.addEventListener("visibilitychange", function () {
-      function adjustBodyHeight() {
-        document.body.style.height = window.innerHeight + 'vh';
-      }
+    function isIOSStandAlonePwaPlatform() {
+      const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isInStandaloneMode = window.navigator.standalone === true;
+      return isIos && isInStandaloneMode;
+    }
 
+    document.addEventListener("visibilitychange", function () {
       console.log('document.visibilityState: ', document.visibilityState);
-      if (document.visibilityState === 'visible') {
+      if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform()) {
         location.reload();
       }
     });

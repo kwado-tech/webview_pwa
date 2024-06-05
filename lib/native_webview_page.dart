@@ -41,7 +41,7 @@ class _WebviewPageState extends State<WebviewPage> {
           debugPrint('isIOSMobileWebPlatform: $isIOSMobileWebPlatform');
 
           if (isIOSMobileWebPlatform) {
-            await launchUrl(widget.uri);
+            await launchUrl(widget.uri, webOnlyWindowName: '_blank');
           } else {
             await launchUrl(widget.uri, webOnlyWindowName: '_self');
           }

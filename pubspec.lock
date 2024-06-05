@@ -111,13 +111,12 @@ packages:
     source: hosted
     version: "1.0.10"
   flutter_inappwebview_web:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: flutter_inappwebview_web
-      ref: "7cac4c3c0ce50302cb9144901f425d00e4bf4870"
-      resolved-ref: "7cac4c3c0ce50302cb9144901f425d00e4bf4870"
-      url: "git@github.com:p-mazhnik/flutter_inappwebview.git"
-    source: git
+      name: flutter_inappwebview_web
+      sha256: d8c680abfb6fec71609a700199635d38a744df0febd5544c5a020bd73de8ee07
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.8"
   flutter_lints:
     dependency: "direct dev"

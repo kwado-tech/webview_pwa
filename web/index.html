@@ -82,11 +82,10 @@
   <script>
     // adjusts the padding to remove any extra space added by the browser when navigating back from url (applicable to ios pwa)
     document.addEventListener("visibilitychange", function () {
-      console.log('document.visibilityState: ->', document.visibilityState);
+      console.log('document.visibilityState: ->', document.visibilityState)
       if (document.visibilityState === 'visible') {
         document.body.style.marginBottom = '0px';
         document.body.style.paddingBottom = '0px';
-
       }
     });
   </script>

@@ -85,7 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 // );
               },
               child: const Text('Goto Webview'),
-            )
+            ),
+            const Spacer(),
+            const Text('some bottom text'),
           ],
         ),
       ),

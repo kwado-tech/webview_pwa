@@ -22,16 +22,22 @@
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="webview_pwa">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="apple-mobile-web-app-title" content="webview_pwa"> -->
 
   <title>webview_pwa</title>
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-title" content="webview_pwa">
+
+  <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'unsafe-eval' *">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -43,6 +49,18 @@
     defer></script>
 
   <style>
+    html,
+    body {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    body {
+      background-color: #ffffff;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
     #iframe-placeholder {
       position: absolute;
       top: 0;
@@ -56,6 +74,22 @@
       pointer-events: auto;
     }
   </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service_worker.js');
+    }
+  </script>
+  <script>
+    // adjusts the padding to remove any extra space added by the browser when navigating back from url (applicable to ios pwa)
+    document.addEventListener("visibilitychange", function () {
+      console.log('document.visibilityState: ->', document.visibilityState);
+      if (document.visibilityState === 'visible') {
+        document.body.style.marginBottom = '0px';
+        document.body.style.paddingBottom = '0px';
+
+      }
+    });
+  </script>
 </head>
 
 <body>

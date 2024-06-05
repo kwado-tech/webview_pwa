@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <base href="$FLUTTER_BASE_HREF">
   <meta charset="UTF-8">
@@ -9,6 +10,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="webview_pwa">
+
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <link rel="icon" type="image/png" href="favicon.png">
   <title>webview_pwa</title>
@@ -17,7 +19,8 @@
     const serviceWorkerVersion = null;
   </script>
   <script src="flutter.js" defer></script>
-  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
+  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
+    defer></script>
   <script>
     function setViewportHeight() {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -29,9 +32,26 @@
     setViewportHeight();
   </script>
   <style>
+    :root {
+      --safe-area-inset-top: env(safe-area-inset-top);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom);
+      --safe-area-inset-left: env(safe-area-inset-left);
+      --safe-area-inset-right: env(safe-area-inset-right);
+    }
+
+    body {
+      padding-top: var(--safe-area-inset-top);
+      padding-bottom: var(--safe-area-inset-bottom);
+      padding-left: var(--safe-area-inset-left);
+      padding-right: var(--safe-area-inset-right);
+      margin: 0;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+
     html,
     body {
-      height: 100vh;
+      height: 100%;
       width: 100%;
       overflow: hidden;
       -webkit-overflow-scrolling: touch;
@@ -40,7 +60,7 @@
     }
 
     #content {
-      height: calc(var(--vh, 1vh) * 100);
+      height: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -59,10 +79,12 @@
     }
 
     #footer {
-      margin-bottom: 0; /* Ensure there's no extra margin */
+      margin-bottom: 0;
+      /* Ensure there's no extra margin */
     }
   </style>
 </head>
+
 <body>
   <div id="iframe-placeholder" style="width: 100%; height: 100vh;"></div>
   <script>
@@ -80,4 +102,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -28,38 +28,19 @@ class WebviewPage extends StatefulWidget {
 }
 
 class _WebviewPageState extends State<WebviewPage> {
-  Future<void> _launchURL(BuildContext context, Uri uri) async {
-    final isIOSMobileWebPlatform =
-        kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS);
-
-    debugPrint('isIOSMobileWebPlatform: $isIOSMobileWebPlatform');
-
-    if (isIOSMobileWebPlatform) {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, webOnlyWindowName: '_blank');
-      } else {
-        debugPrint('Could not launch $uri');
-      }
-    } else {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, webOnlyWindowName: '_self');
-      } else {
-        debugPrint('Could not launch $uri');
-      }
-    }
-
-    Navigator.of(context).pop();
-  }
-
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 2)).then(
-      (value) async {
-        await _launchURL(context, widget.uri);
-      },
-    );
+    if (mounted) {
+      Future.delayed(const Duration(seconds: 2)).then(
+        (value) async {
+          await launchUrl(widget.uri, webOnlyWindowName: '_self');
+
+          Navigator.of(context).pop();
+        },
+      );
+    }
   }
 
   @override

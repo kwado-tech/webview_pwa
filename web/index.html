@@ -25,7 +25,9 @@
     document.addEventListener("visibilitychange", function () {
       console.log('document.visibilityState: ', document.visibilityState);
       if (document.visibilityState === 'visible') {
-        location.reload();
+        // location.reload();
+        document.body.style.marginBottom = '0px';
+        document.body.style.paddingBottom = '0px';
       }
     });
   </script>

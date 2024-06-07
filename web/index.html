@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="margin:0; padding:0; height:100vh;">
+<html>
 
 <head>
   <!-- <base href="$FLUTTER_BASE_HREF"> -->
@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="webview_pwa">
@@ -65,6 +65,7 @@
         console.log('REFRESH HAPPENED!!!');
         // location.reload();
         // recalculateViewport();
+        document.body.height = window.innerHeight;
       }
     });
   </script>

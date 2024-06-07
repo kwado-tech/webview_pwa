@@ -48,11 +48,11 @@ const init = () => {
                 }
             };
 
-        function reportWindowSize() {
-            console.log('resize', window.innerHeight, window.innerWidth);
-        }
+        // function reportWindowSize() {
+        //     console.log('resize', window.innerHeight, window.innerWidth);
+        // }
 
-        window.onresize = reportWindowSize;
+        // window.onresize = reportWindowSize;
         document.addEventListener("visibilitychange", visibilityChangeListener);
 
         return visibilityChangeListener;

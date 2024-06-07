@@ -17,8 +17,8 @@ const init = () => {
 
                 if (document.visibilityState === 'visible' && isHomePath) {
                     console.log('REFRESH HAPPENED!!!');
-                    document.body.height = windowHeight;
-                    // window.resizeTo(window.innerWidth, windowHeight)
+                    // document.body.height = windowHeight;
+                    window.resizeTo(window.innerWidth, 1000)
                     console.log('windowHeight-1', windowHeight);
                 }
             };

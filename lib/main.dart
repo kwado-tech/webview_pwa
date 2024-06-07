@@ -2,7 +2,10 @@
 // import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:webview_pwa/js_interop_service.dart';
 import 'package:webview_pwa/native_webview_page.dart';
+import 'package:webview_pwa/router/route_delegate.dart';
+import 'package:webview_pwa/router/route_information_parser.dart';
 // import 'package:webview_pwa/native_webview_page.dart'
 //     if (dart.library.html) 'package:webview_pwa/pwa_webview_page.dart';
 // import 'package:webview_pwa/fake_platform_view_registry.dart'
@@ -11,7 +14,7 @@ import 'package:webview_pwa/native_webview_page.dart';
 void main() {
   // registerHtmlElement();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 // void registerHtmlElement() {
@@ -30,7 +33,11 @@ void main() {
 // }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final AppRouterDelegate _routerDelegate = AppRouterDelegate();
+  final AppRouteInformationParser _routeInformationParser =
+      AppRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +45,24 @@ class MyApp extends StatelessWidget {
     // final uri = Uri.parse('https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
     // final uri = Uri.parse('https://files.onetouch.io/game/wild-coyote/latest/index.html?config_id=64011d3e02048a5712ee29e1&session_id=c6a8dd38-d2a7-4e3c-aa6f-6d875806dbc4&lobby_url=https%3A%2F%2Fstaging.sportsbet.io%2Fcasino&deposit_url=&device_platform=mobile&engine_base_url=https://core.ot88.io&sub_partner_id=sportsbet&wrapper_url=https://files.onetouch.io/game/game-wrapper-v3/latest&lang=en&ts=1715236121611');
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: WebviewPage(uri: uri),
-      home: const SplashPage(title: 'Flutter Demo Home Page'),
+      routerDelegate: _routerDelegate,
+      routeInformationParser: _routeInformationParser,
     );
   }
 }
 
 class SplashPage extends StatefulWidget {
   final String title;
+  final VoidCallback onTimeElapsed;
 
-  const SplashPage({super.key, required this.title});
+  const SplashPage(
+      {super.key, required this.title, required this.onTimeElapsed});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -65,12 +74,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     if (mounted) {
-      Future.delayed(const Duration(seconds: 2)).then(
-        (value) async {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => MyHomePage(title: widget.title)));
-        },
-      );
+      Future.delayed(const Duration(seconds: 5), widget.onTimeElapsed);
     }
   }
 
@@ -80,16 +84,26 @@ class _SplashPageState extends State<SplashPage> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      final jsInteropService = JsInteropService();
+      // jsInteropService.showAlert('Hey from flutter');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

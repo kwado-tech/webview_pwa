@@ -18,6 +18,7 @@
   <script>
     const serviceWorkerVersion = null;
   </script>
+  <script src="main.js" defer></script>
   <script src="flutter.js" defer></script>
   <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
     defer></script>
@@ -30,7 +31,11 @@
 
     document.addEventListener("visibilitychange", function () {
       console.log('document.visibilityState: ', document.visibilityState);
-      if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform()) {
+      const pattern = /^\/casino\/game\/[A-Za-z0-9=]+\/info\/[\w-]+$/;
+      const isCasinoGameInfoPath = pattern.test(location.pathname);
+
+      if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform() && isCasinoGameInfoPath) {
+
         location.reload();
       }
     });

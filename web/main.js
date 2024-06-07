@@ -16,10 +16,19 @@ const init = () => {
                 const isHomePath = '/home' || '/';
 
                 if (document.visibilityState === 'visible' && isHomePath) {
-                    console.log('REFRESH HAPPENED!!!');
-                    // document.body.height = windowHeight;
-                    window.resizeTo(window.innerWidth, 1000)
-                    console.log('windowHeight-1', windowHeight);
+                    // console.log('REFRESH HAPPENED!!!');
+                    // // document.body.height = windowHeight;
+                    // window.resizeTo(window.innerWidth, 1000)
+                    // console.log('windowHeight-1', windowHeight);
+
+                    setTimeout(() => {
+                        document.documentElement.style.height = '100%';
+                        setTimeout(() => {
+                            // this line prevents the content
+                            // from hiding behind the address bar
+                            window.scrollTo(0, 1);
+                        }, 500);
+                    }, 500);
                 }
             };
 

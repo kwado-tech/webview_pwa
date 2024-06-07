@@ -5,17 +5,15 @@ const init = () => {
         return window.innerHeight;
     }
 
-    function switchToLandscape() {
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('landscape')
-                .then(function () {
-                    console.log('Switched to landscape mode.');
-                })
-                .catch(function (error) {
-                    console.error('Error switching to landscape:', error);
-                });
+    function openAndResizeWindow() {
+        // Open a new window
+        const newWindow = window.open('', '', 'width=800,height=600');
+        if (newWindow) {
+            // Resize the new window
+            newWindow.resizeTo(newWindow.innerWidth, 1000);
+            newWindow.document.write('<p>This window has been resized.</p>');
         } else {
-            console.log('Screen Orientation API is not supported.');
+            alert('Failed to open new window. Please allow pop-ups.');
         }
     }
 
@@ -41,9 +39,9 @@ const init = () => {
                             console.log('REFRESH HAPPENED - 1!!!');
                             // this line prevents the content
                             // from hiding behind the address bar
-                            // window.scrollTo(0, 1);
-                            // window.resizeTo(window.innerWidth, 1000);
-                            switchToLandscape();
+                            window.scrollTo(0, 1);
+                            window.resizeTo(window.innerWidth, 1000);
+                            openAndResizeWindow();
                         }, 500);
                     }, 500);
                 }

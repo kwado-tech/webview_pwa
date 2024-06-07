@@ -16,14 +16,7 @@ dependencies:
   js: ^0.6.7
   modal_bottom_sheet: ^3.0.0
   url_launcher: ^6.2.6
-
-# dependency_overrides:
-#   flutter_inappwebview_web:
-#     git:
-#       url: git@github.com:p-mazhnik/flutter_inappwebview.git
-#       path: flutter_inappwebview_web
-#       ref: 7cac4c3c0ce50302cb9144901f425d00e4bf4870
-      # or ref: web-fix
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0

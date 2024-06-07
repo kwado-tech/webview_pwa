@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <base href="$FLUTTER_BASE_HREF">
+  <!-- <base href="$FLUTTER_BASE_HREF"> -->
+  <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
@@ -29,14 +30,41 @@
       return isIos && isInStandaloneMode;
     }
 
+    function recalculateViewport() {
+      // Trigger resize event
+      window.dispatchEvent(new Event('resize'));
+
+      // Temporarily manipulate CSS
+      document.body.style.height = '100%';
+      document.body.offsetHeight; // Trigger reflow
+      document.body.style.height = '';
+
+      // Apply and remove CSS transformation
+      document.body.style.transform = 'scale(1)';
+      document.body.offsetHeight; // Trigger reflow
+      document.body.style.transform = '';
+
+      // Trigger scroll events
+      window.scrollTo(0, document.body.scrollHeight);
+      window.scrollTo(0, 0);
+
+      // Reset the margin to fix the issue
+      document.body.style.marginBottom = '0';
+    }
+
     document.addEventListener("visibilitychange", function () {
       console.log('document.visibilityState: ', document.visibilityState);
-      const pattern = /^\/casino\/game\/[A-Za-z0-9=]+\/info\/[\w-]+$/;
-      const isCasinoGameInfoPath = pattern.test(location.pathname);
+      // const pattern = /^\/casino\/game\/[A-Za-z0-9=]+\/info\/[\w-]+$/;
+      // const isCasinoGameInfoPath = pattern.test(location.pathname);
 
-      if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform() && isCasinoGameInfoPath) {
+      const isHomePath = '/home' || '/';
+      console.log('document.visibilityState', document.visibilityState === 'visible' && isHomePath);
 
-        location.reload();
+      // if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform() && isHomePath) {
+      if (document.visibilityState === 'visible' && isHomePath) {
+        console.log('REFRESH HAPPENED!!!');
+        // location.reload();
+        recalculateViewport();
       }
     });
   </script>

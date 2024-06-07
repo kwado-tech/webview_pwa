@@ -2,35 +2,18 @@
 // import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:webview_pwa/js_interop_service.dart';
 import 'package:webview_pwa/native_webview_page.dart';
 import 'package:webview_pwa/router/route_delegate.dart';
 import 'package:webview_pwa/router/route_information_parser.dart';
-// import 'package:webview_pwa/native_webview_page.dart'
-//     if (dart.library.html) 'package:webview_pwa/pwa_webview_page.dart';
-// import 'package:webview_pwa/fake_platform_view_registry.dart'
-//     if (dart.library.html) 'dart:ui_web' as ui show platformViewRegistry;
 
 void main() {
   // registerHtmlElement();
-
+  setPathUrlStrategy();
+  print("Current path: ${Uri.base.path}");
   runApp(MyApp());
 }
-
-// void registerHtmlElement() {
-//   // Check if the placeholder is available and register it.
-//   ui.platformViewRegistry.registerViewFactory('iframe-placeholder',
-//       (int viewId) {
-//     final element = html.document.getElementById('iframe-placeholder');
-//     if (element == null) {
-//       print('Element not found during registration');
-//       // Optionally create and insert the element or handle the error.
-//       return html
-//           .DivElement(); // Return an empty placeholder to avoid breaking.
-//     }
-//     return element;
-//   });
-// }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -100,7 +83,7 @@ class _HomePageState extends State<HomePage> {
 
     if (mounted) {
       final jsInteropService = JsInteropService();
-      // jsInteropService.showAlert('Hey from flutter');
+      jsInteropService.showAlert('Hey from flutter');
     }
   }
 

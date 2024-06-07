@@ -18,9 +18,6 @@ const init = () => {
     }
 
     const addResizeOnVisibilityChangeEventListener = (windowHeight) => {
-        console.log('windowHeight', windowHeight);
-        console.log('document.body.height', document.body.height);
-
         const visibilityChangeListener =
             () => {
                 // const matcher = new RegExp(pattern);
@@ -29,6 +26,9 @@ const init = () => {
 
                 if (document.visibilityState === 'visible' && isHomePath) {
                     console.log('REFRESH HAPPENED!!!');
+
+                    console.log('windowHeight', windowHeight);
+                    console.log('document.body.height', document.body.height);
                     // location.reload();
                     // // document.body.height = windowHeight;
                     // window.resizeTo(window.innerWidth, 1000)

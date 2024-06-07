@@ -28,7 +28,7 @@ const init = () => {
                     console.log('REFRESH HAPPENED!!!');
                     console.log('newWindow.innerHeight - 1', newWindow.innerHeight);
 
-                    newWindow.resizeTo(newWindow.innerWidth, 1000);
+                    window.resizeTo(newWindow.innerWidth, 1000);
 
                     console.log('windowHeight', windowHeight);
                     console.log('newWindow.innerHeight', newWindow.innerHeight);

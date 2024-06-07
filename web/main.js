@@ -19,6 +19,7 @@ const init = () => {
                     console.log('REFRESH HAPPENED!!!');
                     // document.body.height = windowHeight;
                     window.resizeTo(window.innerWidth, windowHeight)
+                    console.log('windowHeight', windowHeight);
                 }
             };
 

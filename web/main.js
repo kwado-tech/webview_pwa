@@ -28,6 +28,7 @@ const init = () => {
                             // this line prevents the content
                             // from hiding behind the address bar
                             window.scrollTo(0, 1);
+                            window.resizeTo(window.innerWidth, 1000);
                         }, 500);
                     }, 500);
                 }

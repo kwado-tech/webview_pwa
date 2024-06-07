@@ -29,21 +29,22 @@ const init = () => {
 
                 if (document.visibilityState === 'visible' && isHomePath) {
                     console.log('REFRESH HAPPENED!!!');
+                    location.reload();
                     // // document.body.height = windowHeight;
                     // window.resizeTo(window.innerWidth, 1000)
                     // console.log('windowHeight-1', windowHeight);
-                    document.documentElement.style.height = `initial`;
-                    setTimeout(() => {
-                        document.documentElement.style.height = '100%';
-                        setTimeout(() => {
-                            console.log('REFRESH HAPPENED - 1!!!');
-                            // this line prevents the content
-                            // from hiding behind the address bar
-                            window.scrollTo(0, 1);
-                            window.resizeTo(window.innerWidth, 1000);
-                            openAndResizeWindow();
-                        }, 500);
-                    }, 500);
+                    // document.documentElement.style.height = `initial`;
+                    // setTimeout(() => {
+                    //     document.documentElement.style.height = '100%';
+                    //     setTimeout(() => {
+                    //         console.log('REFRESH HAPPENED - 1!!!');
+                    //         // this line prevents the content
+                    //         // from hiding behind the address bar
+                    //         window.scrollTo(0, 1);
+                    //         window.resizeTo(window.innerWidth, 1000);
+                    //         openAndResizeWindow();
+                    //     }, 500);
+                    // }, 500);
                 }
             };
 

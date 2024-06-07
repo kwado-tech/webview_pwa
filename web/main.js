@@ -26,13 +26,13 @@ const init = () => {
 
                 if (document.visibilityState === 'visible' && isHomePath) {
                     console.log('REFRESH HAPPENED!!!');
-                    console.log('newWindow.innerHeight - 1', newWindow.innerHeight);
+                    console.log('newWindow.innerHeight - 1', window.innerHeight);
 
-                    window.resizeTo(newWindow.innerWidth, 1000);
+                    window.resizeTo(window.innerWidth, 1000);
 
                     console.log('windowHeight', windowHeight);
-                    console.log('newWindow.innerHeight', newWindow.innerHeight);
-                    console.log('newWindow.innerWidth', newWindow.innerWidth);
+                    console.log('window.innerHeight', window.innerHeight);
+                    console.log('window.innerWidth', window.innerWidth);
                     // location.reload();
                     // // document.body.height = windowHeight;
                     // window.resizeTo(window.innerWidth, 1000)

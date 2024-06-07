@@ -48,6 +48,9 @@ const init = () => {
                 }
             };
 
+        addEventListener("resize", (event) => {
+            console.log('resize:', event);
+        });
         document.addEventListener("visibilitychange", visibilityChangeListener);
 
         return visibilityChangeListener;

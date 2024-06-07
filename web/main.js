@@ -5,6 +5,20 @@ const init = () => {
         return window.innerHeight;
     }
 
+    function switchToLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape')
+                .then(function () {
+                    console.log('Switched to landscape mode.');
+                })
+                .catch(function (error) {
+                    console.error('Error switching to landscape:', error);
+                });
+        } else {
+            console.log('Screen Orientation API is not supported.');
+        }
+    }
+
     const addResizeOnVisibilityChangeEventListener = (windowHeight) => {
         console.log('windowHeight', windowHeight);
         console.log('document.body.height', document.body.height);
@@ -27,8 +41,9 @@ const init = () => {
                             console.log('REFRESH HAPPENED - 1!!!');
                             // this line prevents the content
                             // from hiding behind the address bar
-                            window.scrollTo(0, 1);
-                            window.resizeTo(window.innerWidth, 1000);
+                            // window.scrollTo(0, 1);
+                            // window.resizeTo(window.innerWidth, 1000);
+                            switchToLandscape();
                         }, 500);
                     }, 500);
                 }

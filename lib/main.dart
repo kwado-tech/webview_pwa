@@ -81,9 +81,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    print('initState ||||');
+
     if (mounted) {
       final jsInteropService = JsInteropService();
-      jsInteropService.showAlert('Hey from flutter');
+      final windowInnerHeight = jsInteropService.getWindowInnerHeight();
+      jsInteropService.addResizeOnVisibilityChangeEventListener(
+          windowHeight: windowInnerHeight);
     }
   }
 

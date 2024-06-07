@@ -48,9 +48,11 @@ const init = () => {
                 }
             };
 
-        addEventListener("resize", (event) => {
-            console.log('resize:', event);
-        });
+        function reportWindowSize() {
+            console.log('resize', window.innerHeight, window.innerWidth);
+        }
+
+        window.onresize = reportWindowSize;
         document.addEventListener("visibilitychange", visibilityChangeListener);
 
         return visibilityChangeListener;

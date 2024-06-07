@@ -63,9 +63,12 @@
       // if (document.visibilityState === 'visible' && isIOSStandAlonePwaPlatform() && isHomePath) {
       if (document.visibilityState === 'visible' && isHomePath) {
         console.log('REFRESH HAPPENED!!!');
+        console.log('window.innerHeight: ', window.innerHeight);
+        console.log('document.body.height: ', document.body.height);
+        console.log('document.body.height: ', document.body.height);
         // location.reload();
         // recalculateViewport();
-        document.body.height = window.innerHeight;
+        // document.body.height = window.innerHeight;
       }
     });
   </script>

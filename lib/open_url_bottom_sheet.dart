@@ -20,7 +20,7 @@ class _OpenUrlBottomSheetState extends State<OpenUrlBottomSheet> {
     if (mounted) {
       Future.delayed(const Duration(seconds: 5)).then(
         (value) {
-          launchUrl(widget.uri, webOnlyWindowName: '_self');
+          launchUrl(widget.uri, webOnlyWindowName: '_blank');
         },
       );
     }

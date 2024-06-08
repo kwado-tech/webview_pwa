@@ -35,7 +35,7 @@ class _WebviewPageState extends State<WebviewPage> {
     if (mounted) {
       Future.delayed(const Duration(seconds: 2)).then(
         (value) async {
-          await launchUrl(widget.uri, webOnlyWindowName: '_self');
+          await launchUrl(widget.uri, webOnlyWindowName: '_blank');
 
           Navigator.of(context).pop();
         },

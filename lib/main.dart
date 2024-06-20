@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:webview_pwa/js_interop_service.dart';
 import 'package:webview_pwa/native_webview_page.dart';
+import 'package:webview_pwa/platform_util.dart';
 import 'package:webview_pwa/router/route_delegate.dart';
 import 'package:webview_pwa/router/route_information_parser.dart';
 
@@ -78,11 +79,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late IPlatformUtil platformUtil;
+
   @override
   void initState() {
     super.initState();
 
     print('initState ||||');
+
+    platformUtil = PlatformUtil();
 
     if (mounted) {
       final jsInteropService = JsInteropService();
@@ -110,7 +115,8 @@ class _HomePageState extends State<HomePage> {
                 final uri = Uri.parse(
                     'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
 
-                launchUrl(uri);
+                launchUrl(uri,
+                    webOnlyWindowName: platformUtil.isChrome ? '_self' : null);
                 // WebviewPage.show(context, uri: uri);
                 // Navigator.of(context).push(
                 //   MaterialPageRoute(
@@ -121,6 +127,8 @@ class _HomePageState extends State<HomePage> {
             ),
             const Spacer(),
             const Text('some bottom text'),
+            Text('isChrome ${platformUtil.isChrome}'),
+            Text('isSafari ${platformUtil.isSafari}'),
           ],
         ),
       ),

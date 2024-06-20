@@ -1,6 +1,7 @@
 // ignore: avoid_web_libraries_in_flutter
 // import 'dart:html' as html;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
 
                 launchUrl(uri,
-                    webOnlyWindowName: platformUtil.isChrome ? '_self' : null);
+                    webOnlyWindowName: kIsWeb && !platformUtil.isSafari ? '_self' : null);
                 // WebviewPage.show(context, uri: uri);
                 // Navigator.of(context).push(
                 //   MaterialPageRoute(
@@ -129,6 +130,7 @@ class _HomePageState extends State<HomePage> {
             const Text('some bottom text'),
             Text('isChrome ${platformUtil.isChrome}'),
             Text('isSafari ${platformUtil.isSafari}'),
+            const Text('kIsWeb $kIsWeb'),
           ],
         ),
       ),

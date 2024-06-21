@@ -90,12 +90,12 @@ class _HomePageState extends State<HomePage> {
 
     platformUtil = PlatformUtil();
 
-    if (mounted) {
-      final jsInteropService = JsInteropService();
-      final windowInnerHeight = jsInteropService.getWindowInnerHeight();
-      jsInteropService.addResizeOnVisibilityChangeEventListener(
-          windowHeight: windowInnerHeight);
-    }
+    // if (mounted) {
+    //   final jsInteropService = JsInteropService();
+    //   final windowInnerHeight = jsInteropService.getWindowInnerHeight();
+    //   jsInteropService.addResizeOnVisibilityChangeEventListener(
+    //       windowHeight: windowInnerHeight);
+    // }
   }
 
   @override
@@ -116,13 +116,13 @@ class _HomePageState extends State<HomePage> {
                 final uri = Uri.parse(
                     'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
 
-                launchUrl(uri,
-                    webOnlyWindowName: kIsWeb && !platformUtil.isSafari ? '_self' : null);
+                // launchUrl(uri,
+                //     webOnlyWindowName: kIsWeb && !platformUtil.isSafari ? '_self' : null);
                 // WebviewPage.show(context, uri: uri);
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //       builder: (context) => WebviewPage.show(uri: uri)),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => WebviewPage(uri: uri)),
+                );
               },
               child: const Text('Goto Webview'),
             ),

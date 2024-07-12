@@ -1,8 +1,9 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:ui_web' as ui_web;
 
 class WebviewPage extends StatelessWidget {
   final Uri uri;
@@ -16,96 +17,103 @@ class WebviewPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Webview'),
       ),
-      body: Container(
-        // color: Colors.white,
-        child: WebviewPageBuilder(uri: uri),
+      body: SimpleWebView(
+        url: uri.toString(),
+        onCreated: () {
+          print('Iframe created');
+        },
+        onLoadStart: () {
+          print('Load started');
+        },
+        onLoadStop: () {
+          print('Load stopped');
+        },
+        onUpdateHistory: (url) {
+          print('History updated: $url');
+        },
       ),
     );
   }
 }
 
-class WebviewPageBuilder extends StatefulWidget {
-  final Uri uri;
+class SimpleWebView extends StatefulWidget {
+  final String url;
+  final VoidCallback? onLoadStart;
+  final VoidCallback? onLoadStop;
+  final ValueChanged<String>? onUpdateHistory;
+  final VoidCallback? onCreated;
 
-  const WebviewPageBuilder({super.key, required this.uri});
+  const SimpleWebView({
+    Key? key,
+    required this.url,
+    this.onLoadStart,
+    this.onLoadStop,
+    this.onUpdateHistory,
+    this.onCreated,
+  }) : super(key: key);
 
   @override
-  State<WebviewPageBuilder> createState() => _WebviewPageBuilderState();
+  State<SimpleWebView> createState() => _SimpleWebViewState();
 }
 
-class _WebviewPageBuilderState extends State<WebviewPageBuilder> {
+class _SimpleWebViewState extends State<SimpleWebView> {
+  late html.IFrameElement _iframe;
+
   @override
   void initState() {
     super.initState();
-    // Load the iframe after the widget build is complete
-    WidgetsBinding.instance.addPostFrameCallback((_) => createIframe());
+
+    registerIframeFactory();
   }
 
-  // Inside your createIframe method in Dart
-  void createIframe() {
-    Future.delayed(const Duration(milliseconds: 100), () {
-      final placeholder = html.document.getElementById('iframe-placeholder');
-      if (placeholder != null) {
-        final iframe = html.IFrameElement()
-          ..src = widget.uri.toString()
-          ..style.border = 'none'
-          ..style.width = '100%'
-          ..style.height = '100%'
-          ..setAttribute('scrolling', 'yes'); // Enable scrolling explicitly
+  @override
+  void dispose() {
+    _iframe.remove();
 
-        placeholder.children.clear(); // Clear previous contents if any
-        placeholder.children.add(iframe);
+    super.dispose();
+  }
 
-        print('IFrame added: ${placeholder.contains(iframe)}');
+  void registerIframeFactory() {
+    _iframe = html.IFrameElement()
+      ..src = widget.url
+      ..style.border = 'none';
 
-        injectScript();
-      } else {
-        print('Placeholder not found -- ');
+    if (widget.onCreated != null) {
+      widget.onCreated!();
+    }
+
+    _iframe.onLoad.listen((event) {
+      if (widget.onLoadStop != null) {
+        widget.onLoadStop!();
       }
     });
-  }
 
-  void injectScript() {
-    final script = html.ScriptElement()
-      ..text = """
-    if (document.readyState === 'complete') {
-      iframeLoadHandler();
-    } else {
-      document.addEventListener('DOMContentLoaded', iframeLoadHandler);
-    }
-
-    function iframeLoadHandler() {
-      const iframe = document.querySelector('iframe');
-      if (iframe) {
-        iframe.onload = function() {
-          console.log('IFrame content loaded');
-          captureAllClicks(iframe);
-        };
+    _iframe.onError.listen((event) {
+      if (widget.onLoadStart != null) {
+        widget.onLoadStart!();
       }
-    }
-    
-    function captureAllClicks(iframe) {
-      // Capture all click events on every element within the iframe
-      iframe.contentWindow.document.addEventListener('click', function(event) {
-        console.log('Click captured:', event.target);
-        // You can implement additional logic based on the click target
-        // For instance, you can stop certain events or log them to an analytics service
-        // event.preventDefault();  // Optional: Prevent the default click action
-        // event.stopPropagation(); // Optional: Stop the click event from propagating
-      }, true); // Use capture phase to handle the event first
-    }
-  """;
-    html.document.body?.children.add(script);
+    });
+
+    html.window.onPopState.listen((event) {
+      if (widget.onUpdateHistory != null) {
+        widget.onUpdateHistory!(html.window.location.href);
+      }
+    });
+
+    html.window.onHashChange.listen((event) {
+      if (widget.onUpdateHistory != null) {
+        widget.onUpdateHistory!(html.window.location.href);
+      }
+    });
+
+    ui_web.platformViewRegistry
+        .registerViewFactory('iframeElement', (int viewId) => _iframe);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
-      children: <Widget>[
-        Positioned.fill(
-          child: HtmlElementView(viewType: 'iframe-placeholder'),
-        ),
-      ],
+    return const HtmlElementView(
+      viewType: 'iframeElement',
     );
   }
 }

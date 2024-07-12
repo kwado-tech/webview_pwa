@@ -113,8 +113,8 @@ class _HomePageState extends State<HomePage> {
                 // final uri = Uri.parse('https://google.com');
                 // final uri = Uri.parse('https://flutter.dev/');
                 final uri = Uri.parse(
-                    // 'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
-                    'https://demogamesfree.jtmmizms.net/gs2c/html5Game.do?extGame=1&symbol=vs20olympgate&gname=Gates%20of%20Olympus&jurisdictionID=99&lobbyUrl=https%3A%2F%2Fm-staging.sportsbet.io%2Fcasino&mgckey=stylename@cng_sportsbetio~SESSION@18063a6d-f179-4f71-8316-f44bb395d1af');
+                    'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
+                  //  'https://cdn-replay-eu.avatarux.app/looney-pop/index.html?game=looney-pop&wallet=demo&operator=b2c&key=&server=https%3A%2F%2Freplay-eu.avatarux.app&language=en&depositUrl=&lobbyUrl=https%3A%2F%2Fstaging.sportsbet.io%2Fcasino&provider=avatarux&channel=mobile&rgs=avatarux-rgs');
 
                 // launchUrl(uri,
                 //     webOnlyWindowName: kIsWeb && !platformUtil.isSafari ? '_self' : null);

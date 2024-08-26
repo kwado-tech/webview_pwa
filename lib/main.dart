@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const Spacer(),
             const Text('some bottom text'),
-            Text('platformUtil.isInstalled => ${platformUtil.isInstalled}'),
+            Text('platformUtil.isInstalled -> ${platformUtil.isInstalled}'),
             Text('isChrome ${platformUtil.isChrome}'),
             Text('isSafari ${platformUtil.isSafari}'),
             const Text('kIsWeb $kIsWeb'),

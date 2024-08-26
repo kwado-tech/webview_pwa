@@ -4,4 +4,5 @@ export 'platform_util_native.dart'
 abstract class IPlatformUtil {
   bool get isChrome;
   bool get isSafari;
+  bool get isInstalled;
 }

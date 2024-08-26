@@ -6,4 +6,7 @@ class PlatformUtil extends IPlatformUtil {
 
   @override
   bool get isSafari => false;
+  
+  @override
+  bool get isInstalled => throw UnimplementedError();
 }

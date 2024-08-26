@@ -3,6 +3,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:webview_pwa/native_webview_page.dart'
     if (dart.library.html) 'package:webview_pwa/pwa_webview_page.dart';
@@ -114,20 +115,23 @@ class _HomePageState extends State<HomePage> {
                 // final uri = Uri.parse('https://flutter.dev/');
                 final uri = Uri.parse(
                     'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
-                  //  'https://cdn-replay-eu.avatarux.app/looney-pop/index.html?game=looney-pop&wallet=demo&operator=b2c&key=&server=https%3A%2F%2Freplay-eu.avatarux.app&language=en&depositUrl=&lobbyUrl=https%3A%2F%2Fstaging.sportsbet.io%2Fcasino&provider=avatarux&channel=mobile&rgs=avatarux-rgs');
+                //  'https://cdn-replay-eu.avatarux.app/looney-pop/index.html?game=looney-pop&wallet=demo&operator=b2c&key=&server=https%3A%2F%2Freplay-eu.avatarux.app&language=en&depositUrl=&lobbyUrl=https%3A%2F%2Fstaging.sportsbet.io%2Fcasino&provider=avatarux&channel=mobile&rgs=avatarux-rgs');
 
-                // launchUrl(uri,
-                //     webOnlyWindowName: kIsWeb && !platformUtil.isSafari ? '_self' : null);
+                final webOnlyWindowName =
+                    !platformUtil.isInstalled ? '_self' : null;
+
+                launchUrl(uri, webOnlyWindowName: webOnlyWindowName);
                 // WebviewPage.show(context, uri: uri);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => WebviewPage(uri: uri)),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //       builder: (context) => WebviewPage(uri: uri)),
+                // );
               },
               child: const Text('Goto Webview'),
             ),
             const Spacer(),
             const Text('some bottom text'),
+            Text('platformUtil.isInstalled => ${platformUtil.isInstalled}'),
             Text('isChrome ${platformUtil.isChrome}'),
             Text('isSafari ${platformUtil.isSafari}'),
             const Text('kIsWeb $kIsWeb'),

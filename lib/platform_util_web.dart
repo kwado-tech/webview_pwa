@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'dart:html' as html;
-import 'dart:js' as js;
+import 'dart:js_util' as js_util;
 
 import 'package:webview_pwa/platform_util.dart';
 
@@ -24,9 +24,13 @@ class PlatformUtil extends IPlatformUtil {
 
   @override
   bool get isInstalled {
-   bool iosStandalone = js.context.hasProperty('navigator') &&
-                       js.context['navigator'].hasProperty('standalone') &&
-                       js.context['navigator']['standalone'] == true;
+    // bool iosStandalone = js.context.hasProperty('navigator') &&
+    //     js.context['navigator'].hasProperty('standalone') &&
+    //     js.context['navigator']['standalone'] == true;
+
+    bool iosStandalone =
+        js_util.hasProperty(html.window.navigator, 'standalone') &&
+            js_util.getProperty(html.window.navigator, 'standalone') == true;
 
     // Check if the app is installed on other platforms
     bool otherPlatformsStandalone =

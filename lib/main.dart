@@ -90,6 +90,17 @@ class _HomePageState extends State<HomePage> {
 
     platformUtil = PlatformUtil();
 
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      final uri = Uri.parse(
+          'https://static-live.hacksawgaming.com/1067/1.62.0/index.html?language=en&channel=mobile&gameid=1067&mode=2&token=demo&lobbyurl=https%253a%252f%252fstaging.sportsbet.io%252fcasino&partner=demo&env=https://rgs-demo.hacksawgaming.com/api&realmoneyenv=https://rgs-demo.hacksawgaming.com/api&alwaysredirect=true');
+      //  'https://cdn-replay-eu.avatarux.app/looney-pop/index.html?game=looney-pop&wallet=demo&operator=b2c&key=&server=https%3A%2F%2Freplay-eu.avatarux.app&language=en&depositUrl=&lobbyUrl=https%3A%2F%2Fstaging.sportsbet.io%2Fcasino&provider=avatarux&channel=mobile&rgs=avatarux-rgs');
+
+      final webOnlyWindowName = !platformUtil.isInstalled ? '_self' : null;
+
+      launchUrl(uri, webOnlyWindowName: webOnlyWindowName);
+      print('LAUNCHERD URL ${uri.toString()}');
+    });
+
     // if (mounted) {
     //   final jsInteropService = JsInteropService();
     //   final windowInnerHeight = jsInteropService.getWindowInnerHeight();

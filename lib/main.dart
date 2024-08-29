@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextButton(
-              onPressed: () {},
+              onPressed: () => _handleButtonClick(),
               child: const Text('Goto Webview'),
             ),
             const Spacer(),
